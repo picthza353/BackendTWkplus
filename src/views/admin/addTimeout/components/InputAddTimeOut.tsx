@@ -79,7 +79,7 @@ const InputAddTimeOut = () => {
 
   return (
     <Card extra={"w-full sm:overflow-auto px-6"}>
-      <div className="w-96 overflow-x-scroll xl:overflow-x-hidden">
+      <div className="w-full overflow-x-hidden xl:overflow-x-hidden">
         <div className="relative mt-5">
           <input
             type="text"
