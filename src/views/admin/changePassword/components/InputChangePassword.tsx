@@ -87,8 +87,8 @@ const InputChangePassword = () => {
   };
 
   return (
-    <Card extra={"w-full sm:overflow-auto px-6"}>
-      <div className="w-96 overflow-x-scroll xl:overflow-x-hidden">
+    <Card extra={"w-full px-6"}>
+      <div className="w-full xl:overflow-x-hidden">
         <div className="relative mt-5">
           <input
             type="text"

@@ -69,8 +69,8 @@ const InputUpgradeUser = () => {
   };
 
   return (
-    <Card extra={"w-full sm:overflow-auto px-6"}>
-      <div className="w-96 overflow-x-scroll xl:overflow-x-hidden">
+    <Card extra={"w-full px-6"}>
+      <div className="w-full xl:overflow-x-hidden">
         <div className="relative mt-5">
           <input
             type="text"
@@ -124,7 +124,7 @@ const InputUpgradeUser = () => {
           </label>
         </div>
         <button
-          className="linear mb-5 mt-4 w-full rounded-xl bg-red-600 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-red-700 active:bg-red-700 dark:bg-red-400 dark:text-white dark:hover:bg-red-300 dark:active:bg-red-200"
+          className="linear mb-5 mt-4 w-full rounded-xl bg-red-600 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-red-700 active:bg-red-700"
           onClick={handleSubmit}
         >
           อัพระดับ VIP

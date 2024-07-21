@@ -1,13 +1,12 @@
-/* eslint-disable */
 import { Link, useLocation } from "react-router-dom";
 import DashIcon from "components/icons/DashIcon";
-// chakra imports
 
-export const SidebarLinks = (props: { routes: RoutesType[] }): JSX.Element => {
+export const SidebarLinks = (props: {
+  routes: RoutesType[];
+  collapsed: boolean;
+}): JSX.Element => {
   let location = useLocation();
-
-  const { routes } = props;
-
+  const { routes, collapsed } = props;
   const activeRoute = (routeName: string) => {
     return location.pathname.includes(routeName);
   };
@@ -19,7 +18,9 @@ export const SidebarLinks = (props: { routes: RoutesType[] }): JSX.Element => {
           <Link key={index} to={route.layout + "/" + route.path}>
             <div className="relative mb-3 flex hover:cursor-pointer">
               <li
-                className="my-[3px] flex cursor-pointer items-center px-8"
+                className={`sidebar-link my-[3px] flex cursor-pointer items-center ${
+                  collapsed ? "mx-auto" : "px-8"
+                }`}
                 key={index}
               >
                 <span
@@ -29,28 +30,29 @@ export const SidebarLinks = (props: { routes: RoutesType[] }): JSX.Element => {
                       : "font-medium text-gray-600"
                   }`}
                 >
-                  {route.icon ? route.icon : <DashIcon />}{" "}
+                  {route.icon ? route.icon : <DashIcon />}
                 </span>
-                <p
-                  className={`leading-1 ml-4 flex ${
-                    activeRoute(route.path) === true
-                      ? "font-bold text-navy-700 dark:text-white"
-                      : "font-medium text-gray-600"
-                  }`}
-                >
-                  {route.name}
-                </p>
+                {!collapsed && (
+                  <p
+                    className={`leading-1 sidebar-link-text ml-4 flex ${
+                      activeRoute(route.path) === true
+                        ? "font-bold text-navy-700 dark:text-white"
+                        : "font-medium text-gray-600"
+                    }`}
+                  >
+                    {route.name}
+                  </p>
+                )}
               </li>
-              {activeRoute(route.path) ? (
-                <div className="absolute right-0 top-px h-9 w-1 rounded-lg bg-red-600 dark:bg-brand-400" />
-              ) : null}
+              {activeRoute(route.path) && (
+                <div className="absolute right-0 top-px h-7 w-1 rounded-lg bg-red-600" />
+              )}
             </div>
           </Link>
         );
       }
     });
   };
-  // BRAND
   return <>{createLinks(routes)}</>;
 };
 

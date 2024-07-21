@@ -27,3 +27,88 @@ input.defaultCheckbox::before {
 input:checked.defaultCheckbox::before {
 	opacity: 1;
 }
+
+/* Global styles */
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	overflow-x: hidden;
+}
+
+/* Sidebar container styles */
+.sidebar-container {
+	display: flex;
+	flex-direction: column;
+	width: 250px;
+	transition: transform 0.3s ease, width 0.3s ease;
+}
+
+.sidebar-container.collapsed {
+	width: 80px;
+}
+
+@media (max-width: 300px) {
+	.sidebar-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		transform: translateX(-100%);
+		z-index: 1000;
+	}
+
+	.sidebar-container.open {
+		transform: translateX(0);
+	}
+
+	.content {
+		margin-left: 0;
+	}
+}
+
+@media (min-width: 300px) {
+	.content {
+		margin-left: 250px;
+	}
+
+	.sidebar-container.collapsed+.content {
+		margin-left: 50px;
+	}
+}
+
+.sidebar-container {
+	transition: width 0.3s ease, transform 0.3s ease;
+	width: 250px;
+}
+
+.sidebar-container.collapsed {
+	width: 50px;
+}
+
+.sidebar-container .sidebar-link {
+	transition: opacity 0.3s ease, padding 0.3s ease;
+}
+
+.sidebar-container.collapsed .sidebar-link-text {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.sidebar-container.collapsed .sidebar-link {
+	justify-content: center;
+	padding-left: 0;
+}
+
+.sidebar-container button {
+	transition: background-color 0.3s ease;
+}
+
+.sidebar-link:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+}
+
+.sidebar-link-text {
+	transition: opacity 0.1s ease;
+}

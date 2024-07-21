@@ -1,21 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Navbar from "components/navbar";
 import Sidebar from "components/sidebar";
 import routes from "routes";
 
-export default function Admin(props: { [x: string]: any }) {
-  const { ...rest } = props;
+export default function Admin() {
   const location = useLocation();
-  const [open, setOpen] = React.useState(true);
-  const [currentRoute, setCurrentRoute] = React.useState("Dashboard");
+  const [currentRoute, setCurrentRoute] = useState("Dashboard");
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  React.useEffect(() => {
-    window.addEventListener("resize", () =>
-      window.innerWidth < 1200 ? setOpen(false) : setOpen(true)
-    );
-  }, []);
-  React.useEffect(() => {
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      if (window.innerWidth < 768 && !isSidebarCollapsed) {
+        setIsSidebarCollapsed(true);
+      } else if (window.innerWidth > 768 && !isSidebarCollapsed) {
+        setIsSidebarCollapsed(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isSidebarCollapsed]);
+
+  const toggleCollapse = () => {
+    if (windowWidth >= 768 || !isSidebarCollapsed) {
+      setIsSidebarCollapsed(!isSidebarCollapsed);
+    }
+  };
+
+  useEffect(() => {
     getActiveRoute(routes);
   }, [location.pathname]);
 
@@ -32,17 +46,7 @@ export default function Admin(props: { [x: string]: any }) {
     }
     return activeRoute;
   };
-  const getActiveNavbar = (routes: RoutesType[]): string | boolean => {
-    let activeNavbar = false;
-    for (let i = 0; i < routes.length; i++) {
-      if (
-        window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1
-      ) {
-        return routes[i].secondary;
-      }
-    }
-    return activeNavbar;
-  };
+
   const getRoutes = (routes: RoutesType[]): any => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
@@ -58,33 +62,30 @@ export default function Admin(props: { [x: string]: any }) {
   document.documentElement.dir = "ltr";
   return (
     <div className="flex h-full w-full">
-      <Sidebar open={open} onClose={() => setOpen(false)} />
-      {/* Navbar & Main Content */}
-      <div className="h-full w-full bg-lightPrimary dark:!bg-navy-900">
-        {/* Main Content */}
-        <main
-          className={`mx-[12px] h-full flex-none transition-all md:pr-2 xl:ml-[313px]`}
-        >
-          {/* Routes */}
-          <div className="h-full">
-            <Navbar
-              onOpenSidenav={() => setOpen(true)}
-              brandText={currentRoute}
-              secondary={getActiveNavbar(routes)}
-              {...rest}
-            />
-            <div className="pt-5s mx-auto mb-auto h-full min-h-[84vh] p-2 md:pr-2">
-              <Routes>
-                {getRoutes(routes)}
-
-                <Route
-                  path="/"
-                  element={<Navigate to="/admin/default" replace />}
-                />
-              </Routes>
+      <Sidebar collapsed={isSidebarCollapsed} />
+      <div
+        className={`content flex-grow ${isSidebarCollapsed ? "collapsed" : ""}`}
+      >
+        <div className="h-full w-full bg-lightPrimary dark:!bg-navy-900">
+          <main className={`mx-[12px] h-full flex-none transition-all md:pr-2`}>
+            <div className="main-content h-full w-full transition-all duration-500 ease-in-out">
+              <Navbar
+                brandText={currentRoute}
+                collapsed={isSidebarCollapsed}
+                toggleCollapse={toggleCollapse}
+              />
+              <div className="pt-5s mx-auto mb-auto h-full min-h-[84vh] p-2 md:pr-2">
+                <Routes>
+                  {getRoutes(routes)}
+                  <Route
+                    path="/"
+                    element={<Navigate to="/admin/default" replace />}
+                  />
+                </Routes>
+              </div>
             </div>
-          </div>
-        </main>
+          </main>
+        </div>
       </div>
     </div>
   );

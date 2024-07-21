@@ -78,7 +78,7 @@ function CheckTable(props: { tableData: User[] }) {
     columnHelper.accessor("username", {
       id: "username",
       header: () => (
-        <p className="pr-[350px] text-sm font-bold text-gray-600 dark:text-white">
+        <p className="text-sm font-bold text-gray-600 dark:text-white sm:pr-0 lg:pr-[350px]">
           Username
         </p>
       ),
@@ -326,8 +326,8 @@ function CheckTable(props: { tableData: User[] }) {
   };
 
   return (
-    <Card extra={"w-full h-full sm:overflow-auto px-6"}>
-      <div className="overflow-x-scroll xl:overflow-x-hidden">
+    <Card extra={"w-full px-6"}>
+      <div className="xl:overflow-x-hidden">
         <table className="w-96">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (

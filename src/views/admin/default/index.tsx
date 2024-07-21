@@ -61,18 +61,16 @@ const Dashboard = () => {
   };
   return (
     <div>
-      {/* Card widget */}
-
       <div className="mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-6">
         <Widget
           icon={<MdPeople className="h-7 w-7 text-navy-700" />}
           title={"ผู้ใช้ทั้งหมด"}
-          subtitle={`${countUser}`}
+          subtitle={`${countUser} คน`}
         />
         <Widget
           icon={<IoPerson className="h-6 w-6 text-navy-700" />}
           title={"ผู้ใช้งานทั้งหมด"}
-          subtitle={`${countLogin}`}
+          subtitle={`${countLogin} คน`}
         />
       </div>
 
@@ -92,7 +90,7 @@ const Dashboard = () => {
           </label>
         </div>
         <button
-          className="linear mt-2 w-full rounded-xl bg-red-600 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-red-700 active:bg-red-700 dark:bg-red-400 dark:text-white dark:hover:bg-red-300 dark:active:bg-red-200"
+          className="linear mt-2 w-full rounded-xl bg-red-600 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-red-700 active:bg-red-700"
           onClick={search}
         >
           ค้นหา

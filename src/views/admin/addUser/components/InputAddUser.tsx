@@ -127,8 +127,8 @@ const InputAddUser = () => {
   };
 
   return (
-    <Card extra={"w-full sm:overflow-x-hidden px-6"}>
-      <div className="w-full sm:overflow-x-hidden xl:overflow-x-hidden">
+    <Card extra={"w-full px-6"}>
+      <div className="w-full xl:overflow-x-hidden">
         <div className="relative mt-5">
           <input
             type="text"

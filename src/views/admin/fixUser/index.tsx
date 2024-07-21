@@ -3,7 +3,7 @@ import getUsers from "../tables/vatiables/tableDataCheck";
 import CheckTable from "./components/CheckTable";
 import InputFixUser from "./components/InputFixUser";
 
-const Marketplace = () => {
+const FixUser = () => {
   const [users, setUsers] = useState<any>([]);
   const [someUsers] = useState<any>([]);
   const loadUser = () => {
@@ -18,12 +18,10 @@ const Marketplace = () => {
   return (
     <div className="mx-auto mt-3 flex h-full items-center justify-center">
       <div className="grid h-full grid-cols-1">
-        {/* right side section */}
-        <div className="col-span-1 mx-auto h-full w-96 rounded-xl 2xl:col-span-1">
+        <div className="col-span-1 mx-auto h-full w-full rounded-xl sm:w-96 md:w-96 lg:w-96 xl:w-96 2xl:col-span-1">
           <InputFixUser />
-          <div className="mb-5" />
         </div>
-        <div className="mt-5 grid grid-cols-1 gap-5 xl:grid-cols-1">
+        <div className="grid grid-cols-1 gap-5 xl:grid-cols-1">
           <div>
             <CheckTable tableData={users} />
           </div>
@@ -33,4 +31,4 @@ const Marketplace = () => {
   );
 };
 
-export default Marketplace;
+export default FixUser;
