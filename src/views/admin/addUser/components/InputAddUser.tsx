@@ -127,8 +127,8 @@ const InputAddUser = () => {
   };
 
   return (
-    <Card extra={"w-full sm:overflow-auto px-6"}>
-      <div className="w-full overflow-x-scroll sm:overflow-x-hidden xl:overflow-x-hidden">
+    <Card extra={"w-full sm:overflow-x-hidden px-6"}>
+      <div className="w-full sm:overflow-x-hidden xl:overflow-x-hidden">
         <div className="relative mt-5">
           <input
             type="text"
@@ -137,7 +137,7 @@ const InputAddUser = () => {
             onFocus={handleFocus(setUsernameFocused)}
             onBlur={handleBlur(setUsernameFocused)}
             onChange={handleChange(setUsername)}
-            className={`flex h-12 w-96 items-center justify-center rounded-xl border bg-white p-3 text-sm outline-none ${
+            className={`flex h-12 w-full items-center justify-center rounded-xl border bg-white p-3 text-sm outline-none ${
               usernameError ? "border-red-500" : ""
             }`}
           />
